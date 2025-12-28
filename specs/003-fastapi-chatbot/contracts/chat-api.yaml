@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Isaac Sim Book Chatbot API
+  description: |
+    REST API for the Isaac Sim Robotics book chatbot.
+    Processes questions through RAG agent and returns responses with citations.
+  version: 1.0.0
+  contact:
+    name: AI-Spec Driven Book Team
+
+servers:
+  - url: http://localhost:8000
+    description: Local development
+  - url: https://huggingface.co/spaces/{username}/{space}
+    description: Hugging Face Spaces production
+
+paths:
+  /api/chat:
+    post:
+      summary: Process chat message
+      description: |
+        Accepts a user question and optional conversation history.
+        Returns LLM-generated answer with citations to book content.
+        Backend is stateless - conversation history must be provided in each request.
+      operationId: chat
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            examples:
+              simple_question:
+                summary: Simple question without history
+                value:
+                  query: "What is URDF?"
+              with_history:
+                summary: Follow-up question with history
+                value:
+                  query: "How is it used in Isaac Sim?"
+                  conversation_history:
+                    - role: "user"
+                      content: "What is URDF?"
+                    - role: "assistant"
+                      content: "URDF (Unified Robot Description Format) is an XML format..."
+                  conversation_id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        '200':
+          description: Successful response with answer and citations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    answer: "URDF (Unified Robot Description Format) is an XML format for describing robots..."
+                    citations:
+                      - title: "URDF Basics"
+                        url: "/docs/module-2/urdf-basics"
+                      - title: "Robot Description"
+                        url: "/docs/module-2/robot-description"
+                    conversation_id: "550e8400-e29b-41d4-a716-446655440000"
+                    error: null
+        '400':
+          description: Invalid request (validation error)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              example:
+                answer: null
+                citations: []
+                conversation_id: null
+                error: "validation"
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              example:
+                answer: null
+                citations: []
+                conversation_id: "550e8400-e29b-41d4-a716-446655440000"
+                error: "rate_limit"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              example:
+                answer: null
+                citations: []
+                conversation_id: "550e8400-e29b-41d4-a716-446655440000"
+                error: "internal"
+
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns service health status for monitoring
+      operationId: healthCheck
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: "healthy"
+                version: "1.0.0"
+                dependencies:
+                  qdrant: "connected"
+                  openrouter: "configured"
+
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: User's question about the book content
+          minLength: 1
+          maxLength: 2000
+          example: "What is URDF?"
+        conversation_history:
+          type: array
+          description: Previous messages for context (stateless - must be provided each request)
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          default: []
+        conversation_id:
+          type: string
+          format: uuid
+          description: Client-generated conversation tracking ID
+          nullable: true
+
+    ChatResponse:
+      type: object
+      required:
+        - citations
+        - conversation_id
+      properties:
+        answer:
+          type: string
+          description: LLM-generated response to the question
+          nullable: true
+        citations:
+          type: array
+          description: Source references from book content
+          items:
+            $ref: '#/components/schemas/Citation'
+        conversation_id:
+          type: string
+          format: uuid
+          description: Conversation tracking ID (echoed or generated)
+        error:
+          type: string
+          description: Error type if request failed
+          nullable: true
+          enum:
+            - retrieval
+            - generation
+            - rate_limit
+            - validation
+            - internal
+
+    ChatMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          description: Message author
+          enum:
+            - user
+            - assistant
+        content:
+          type: string
+          description: Message text content
+          minLength: 1
+
+    Citation:
+      type: object
+      required:
+        - title
+        - url
+      properties:
+        title:
+          type: string
+          description: Source page title
+          example: "URDF Basics"
+        url:
+          type: string
+          description: Relative Docusaurus route (not absolute URL)
+          pattern: "^/"
+          example: "/docs/module-2/urdf-basics"
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          description: Overall health status
+          enum:
+            - healthy
+            - degraded
+            - unhealthy
+        version:
+          type: string
+          description: API version
+        dependencies:
+          type: object
+          description: Status of external dependencies
+          properties:
+            qdrant:
+              type: string
+              enum: [connected, disconnected, unknown]
+            openrouter:
+              type: string
+              enum: [configured, missing, unknown]
+
+tags:
+  - name: Chat
+    description: Chat operations for Q&A
+  - name: Health
+    description: Service health monitoring

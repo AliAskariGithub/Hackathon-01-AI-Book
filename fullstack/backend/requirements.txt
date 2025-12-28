@@ -1,0 +1,25 @@
+# FastAPI backend dependencies for Hugging Face Spaces
+# See plan.md Phase 2 for rationale
+
+# Web framework
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Environment configuration
+python-dotenv>=1.0
+
+# AI/ML APIs
+cohere>=5.0
+openai>=1.0.0
+
+# Vector database
+qdrant-client>=1.7
+
+# Tokenization
+tiktoken>=0.5.0
+
+# Retry logic
+tenacity>=8.0.0
+
+# YAML for OpenAPI export (optional)
+pyyaml>=6.0

@@ -14,6 +14,12 @@ const config = {
   tagline: 'From embodied intelligence to autonomous humanoids — simulation, perception, AI brains, and Vision–Language–Action systems',
   favicon: 'img/favicon.ico',
 
+  // Custom fields for chatbot integration (FR-003)
+  customFields: {
+    // Backend URL for chat API (set via env var or default to local dev)
+    backendUrl: process.env.BACKEND_URL || 'http://localhost:8000' || 'https://ai-powered-book.vercel.app',
+  },
+
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
@@ -28,7 +34,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'AliAskariGithub', // Usually your GitHub org/user name.
-  projectName: 'AI-Spec-Driven-Book', // Usually your repo name.
+  projectName: 'Hackathon-01-AI-Book', // Usually your repo name.
 
   onBrokenLinks: 'warn',
   onBrokenAnchors: 'ignore',
@@ -91,7 +97,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/ai-powered-book-social-card.jpg',
       colorMode: {
         defaultMode: 'dark', // Set dark mode as default
         respectPrefersColorScheme: true,
@@ -129,7 +135,7 @@ const config = {
             title: 'Learn',
             items: [
               {
-                label: '0: Foundations of Physical AI',
+                label: 'Intro: Foundations of Physical AI',
                 to: '/docs/intro',
               },
               {

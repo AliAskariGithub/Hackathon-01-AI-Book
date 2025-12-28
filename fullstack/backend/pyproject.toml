@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "backend"
+version = "0.2.0"
+description = "RAG pipeline for book content embeddings, retrieval, and conversational AI agent"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Spec-1: Embeddings and Retrieval
+    "cohere>=5.0",
+    "qdrant-client>=1.7",
+    "beautifulsoup4>=4.12",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+    # Spec-2: RAG Agent
+    "openai>=1.0.0",
+    "openai-agents>=0.0.1",
+    "tiktoken>=0.5.0",
+    "tenacity>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+]
+
+[tool.setuptools]
+py-modules = ["main", "models", "retrieval", "agent"]
