@@ -15,7 +15,9 @@
       "Skill(sp.plan)",
       "Bash(python -m pytest test/test_retrieves.py -v)",
       "Bash(python retrieves.py --help)",
-      "Bash(python agent.py)"
+      "Bash(python agent.py)",
+      "Bash(python main.py:*)",
+      "Bash(if not exist \"C:\\\\Hackathons\\\\hackathon-ai-book\\\\fullstack\\\\frontend-book\\\\src\\\\components\\\\Chatbot\" mkdir \"C:\\\\Hackathons\\\\hackathon-ai-book\\\\fullstack\\\\frontend-book\\\\src\\\\components\\\\Chatbot\")"
     ]
   }
 }
