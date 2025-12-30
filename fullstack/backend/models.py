@@ -221,7 +221,7 @@ class RetrievalContext:
 @dataclass
 class AgentConfig:
     """Configuration for the conversational agent (T015)."""
-    model: str = "meta-llama/llama-3.2-3b-instruct:free"
+    model: str = "mistralai/devstral-2512:free"
     base_url: str = "https://openrouter.ai/api/v1"
     temperature: float = 0.7
     max_tokens: int = 2048
@@ -231,8 +231,9 @@ class AgentConfig:
     retrieval_threshold: float = 0.3
     # Fallback models if primary is unavailable
     models: List[str] = field(default_factory=lambda: [
-        "meta-llama/llama-3.2-3b-instruct:free",
-        "mistralai/mistral-7b-instruct:free",
+        "mistralai/devstral-2512:free",
+        "xiaomi/mimo-v2-flash:free",
+        "nvidia/nemotron-3-nano-30b-a3b:free",
     ])
 
 
