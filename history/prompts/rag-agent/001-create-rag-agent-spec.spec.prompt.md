@@ -38,7 +38,7 @@ Constraints:
 - File: agent.py
 - OpenAI Agents SDK (use context7 for updated docs)
 - OpenRouter API with free model (e.g., mistralai/devstral-2512:free/xiaomi/mimo-v2-flash:free)
-- Environment variables for OPENROUTER_API_KEY (no hardcoding)
+- Environment variables for GROQ_API_KEY (no hardcoding)
 - Integrates retrieval.py from Spec-1 for vector search
 - Agent instructions reference book domain and content scope
 

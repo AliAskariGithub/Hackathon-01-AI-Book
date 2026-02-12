@@ -35,7 +35,7 @@ python-dotenv = ">=1.0.0"
 Add to `.env` file:
 ```bash
 # OpenRouter (new for Spec-2)
-OPENROUTER_API_KEY=sk-or-v1-your-key-here
+GROQ_API_KEY=sk-or-v1-your-key-here
 
 # Existing from Spec-1
 COHERE_API_KEY=your-cohere-key
@@ -100,7 +100,7 @@ Goodbye!
 
 ## Troubleshooting
 
-### "OPENROUTER_API_KEY not set"
+### "GROQ_API_KEY not set"
 ```bash
 # Check .env file exists and contains the key
 cat .env | grep OPENROUTER

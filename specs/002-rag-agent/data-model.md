@@ -39,7 +39,7 @@ Configuration for the conversational agent. Immutable after initialization.
 | Field | Type | Required | Default | Description |
 |-------|------|----------|---------|-------------|
 | model | str | Yes | "meta-llama/llama-3.2-3b-instruct:free" | OpenRouter model identifier |
-| base_url | str | Yes | "https://openrouter.ai/api/v1" | OpenRouter API endpoint |
+| base_url | str | Yes | "https://api.groq.com/openai/v1" | OpenRouter API endpoint |
 | temperature | float | No | 0.7 | Response creativity (0.0-1.0) |
 | max_tokens | int | No | 2048 | Maximum tokens per response |
 | system_prompt | str | Yes | See below | Agent behavior instructions |
@@ -335,7 +335,7 @@ class RetrievalContext:
 @dataclass
 class AgentConfig:
     model: str = "meta-llama/llama-3.2-3b-instruct:free"
-    base_url: str = "https://openrouter.ai/api/v1"
+    base_url: str = "https://api.groq.com/openai/v1"
     temperature: float = 0.7
     max_tokens: int = 2048
     system_prompt: str = ""

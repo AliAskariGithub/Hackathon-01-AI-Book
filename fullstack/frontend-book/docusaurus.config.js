@@ -16,8 +16,7 @@ const config = {
 
   // Custom fields for chatbot integration (FR-003)
   customFields: {
-    // Backend URL for chat API (set via env var or default to local dev)
-    backendUrl: process.env.BACKEND_URL || 'http://localhost:8000' || 'https://aliaskariface-backend-chatbot-book.hf.space' || "https://ai-powered-book.vercel.app/",
+    backendUrl: process.env.BACKEND_URL || 'http://localhost:8000',
   },
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

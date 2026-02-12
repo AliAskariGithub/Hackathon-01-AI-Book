@@ -319,7 +319,7 @@ All public functions should:
 
 | Variable | Required | Validation | Error if Missing |
 |----------|----------|------------|------------------|
-| OPENROUTER_API_KEY | Yes | Non-empty string | ConfigurationError |
+| GROQ_API_KEY | Yes | Non-empty string | ConfigurationError |
 | COHERE_API_KEY | Yes | Non-empty string | ConfigurationError |
 | QDRANT_URL | Yes | Valid URL | ConfigurationError |
 | QDRANT_API_KEY | Yes | Non-empty string | ConfigurationError |

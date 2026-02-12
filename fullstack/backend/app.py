@@ -177,7 +177,7 @@ async def health_check():
     dependencies = {
         "cohere": bool(os.getenv("COHERE_API_KEY")),
         "qdrant": bool(os.getenv("QDRANT_URL")),
-        "openrouter": bool(os.getenv("OPENROUTER_API_KEY")),
+        "groq": bool(os.getenv("GROQ_API_KEY")),
     }
 
     all_healthy = all(dependencies.values())

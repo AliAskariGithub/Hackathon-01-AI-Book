@@ -14,7 +14,7 @@ REQUIRED_VARS = [
     "COHERE_API_KEY",
     "QDRANT_URL",
     "QDRANT_API_KEY",
-    "OPENROUTER_API_KEY",
+    "GROQ_API_KEY",
     "BOOK_BASE_URL",
 ]
 

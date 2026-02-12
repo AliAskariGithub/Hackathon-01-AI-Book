@@ -30,7 +30,7 @@ OpenAI Agent with RAG retrieval integration
 
 Phase 1: Environment Setup
 - Install dependencies: openai (or openrouter SDK), python-dotenv
-- Add OPENROUTER_API_KEY, OPENROUTER_MODEL to .env
+- Add GROQ_API_KEY, OPENROUTER_MODEL to .env
 - Verify OpenRouter API connectivity with test call
 - Import retrieval.search from Spec-1
 

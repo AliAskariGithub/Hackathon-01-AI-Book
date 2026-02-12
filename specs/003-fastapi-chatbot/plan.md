@@ -231,7 +231,7 @@ curl -X POST http://localhost:8000/api/chat \
        "COHERE_API_KEY",
        "QDRANT_URL",
        "QDRANT_API_KEY",
-       "OPENROUTER_API_KEY",
+       "GROQ_API_KEY",
        "BOOK_BASE_URL"
    ]
    # Raise clear error if any missing
@@ -484,7 +484,7 @@ curl -X POST http://localhost:8000/api/chat \
 1. Deploy backend to Hugging Face Space:
    - Create Space: `{username}/isaac-sim-chatbot-api`
    - Upload files: app.py, api_models.py, validate_config.py, agent.py, retrieval.py, models.py, requirements.txt
-   - Configure secrets: COHERE_API_KEY, QDRANT_URL, QDRANT_API_KEY, OPENROUTER_API_KEY, BOOK_BASE_URL
+   - Configure secrets: COHERE_API_KEY, QDRANT_URL, QDRANT_API_KEY, GROQ_API_KEY, BOOK_BASE_URL
    - **Note**: Replace `{username}` placeholder with actual HF username before deployment
 2. Verify HF Space health endpoint:
    ```bash

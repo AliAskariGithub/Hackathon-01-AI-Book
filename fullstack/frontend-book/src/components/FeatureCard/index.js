@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
-const FeatureCard = ({ 
-  title, 
-  description, 
-  icon: Icon, 
-  link, 
-  color = '#6C3BAA', 
-  className = '' 
+const FeatureCard = ({
+  title,
+  description,
+  icon: Icon,
+  link,
+  color = '#6C3BAA',
+  className = ''
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -17,7 +17,7 @@ const FeatureCard = ({
     <>
       <div className={styles.cardBackground} style={{ background: color }} />
       <div className={styles.cardGlow} style={{ background: `radial-gradient(circle, ${color}20, transparent 70%)` }} />
-      
+
       <div className={styles.iconContainer} style={{ background: `${color}15` }}>
         {Icon ? (
           <Icon className={styles.icon} style={{ color }} />
@@ -27,11 +27,11 @@ const FeatureCard = ({
           </div>
         )}
       </div>
-      
+
       <div className={styles.cardContent}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.description}>{description}</p>
-        
+
         {link && (
           <div className={styles.linkContainer}>
             <span className={styles.linkText} style={{ color }}>
@@ -41,7 +41,7 @@ const FeatureCard = ({
           </div>
         )}
       </div>
-      
+
       <div className={styles.cardBorder} style={{ borderColor: color }} />
     </>
   );

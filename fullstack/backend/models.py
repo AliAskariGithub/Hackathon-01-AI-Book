@@ -221,19 +221,17 @@ class RetrievalContext:
 @dataclass
 class AgentConfig:
     """Configuration for the conversational agent (T015)."""
-    model: str = "mistralai/devstral-2512:free"
-    base_url: str = "https://openrouter.ai/api/v1"
+    model: str = "llama-3.3-70b-versatile"
+    base_url: str = "https://api.groq.com/openai/v1"
     temperature: float = 0.7
     max_tokens: int = 2048
     system_prompt: str = DEFAULT_SYSTEM_PROMPT
     context_window: int = 8192
     retrieval_top_k: int = 5
     retrieval_threshold: float = 0.3
-    # Fallback models if primary is unavailable
+    # Fallback models if primary is unavailable (Groq models)
     models: List[str] = field(default_factory=lambda: [
-        "mistralai/devstral-2512:free",
-        "xiaomi/mimo-v2-flash:free",
-        "nvidia/nemotron-3-nano-30b-a3b:free",
+        "llama-3.3-70b-versatile"
     ])
 
 

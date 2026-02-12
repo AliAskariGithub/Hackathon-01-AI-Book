@@ -135,8 +135,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY")
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 response = client.chat.completions.create(
@@ -238,7 +238,7 @@ for r in results:
 2. Update `.env.example` with:
    ```bash
    # OpenRouter Configuration
-   OPENROUTER_API_KEY=sk-or-v1-your-key-here
+   GROQ_API_KEY=sk-or-v1-your-key-here
 
    # Existing from Spec-1
    COHERE_API_KEY=your-cohere-key
@@ -340,8 +340,8 @@ from openai import AsyncOpenAI
 from agents import set_default_openai_client, set_default_openai_api
 
 client = AsyncOpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY")
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.getenv("GROQ_API_KEY")
 )
 set_default_openai_client(client)
 set_default_openai_api("chat_completions")
@@ -353,8 +353,8 @@ from openai import AsyncOpenAI
 
 def create_openrouter_client() -> AsyncOpenAI:
     return AsyncOpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.getenv("OPENROUTER_API_KEY")
+        base_url="https://api.groq.com/openai/v1",
+        api_key=os.getenv("GROQ_API_KEY")
     )
 ```
 
@@ -368,8 +368,8 @@ def create_openrouter_client() -> AsyncOpenAI:
            config = AgentConfig()
 
        # Validate environment
-       if not os.getenv("OPENROUTER_API_KEY"):
-           raise ConfigurationError("OPENROUTER_API_KEY not set")
+       if not os.getenv("GROQ_API_KEY"):
+           raise ConfigurationError("GROQ_API_KEY not set")
 
        # Test primary model, fall back if needed
        model = try_model(config.models)  # Tries models in order

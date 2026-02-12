@@ -2,7 +2,7 @@
 
 This module implements a conversational AI agent that:
 - Retrieves relevant content from a Qdrant vector database
-- Generates grounded responses using OpenRouter LLMs
+- Generates grounded responses using Groq LLMs
 - Maintains conversation context across turns
 - Provides citations for all answers
 """
@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 # =============================================================================
 # Budget Constants (T023)
 # =============================================================================
-# Context Window Budget (8,192 total for Llama 3.2 3B)
+# Context Window Budget (8,192 total for Groq models)
 # Calculation: 400 + 4000 + 2500 + 1000 = 7900 tokens
 # Safety margin: 292 tokens (3.6%) for tokenizer variance
 
@@ -67,7 +67,7 @@ def get_encoder():
 def count_tokens(text: str) -> int:
     """Count tokens in text using tiktoken cl100k_base encoding.
 
-    Note: This is an approximation for Llama models.
+    Note: This is an approximation for Groq models (Llama, Mixtral, Gemma).
     Research showed <10% variance from actual tokenizer.
 
     Args:
@@ -82,23 +82,23 @@ def count_tokens(text: str) -> int:
 
 
 # =============================================================================
-# OpenRouter Client (T019)
+# Groq Client (T019)
 # =============================================================================
-def create_openrouter_client() -> AsyncOpenAI:
-    """Create an AsyncOpenAI client configured for OpenRouter.
+def create_groq_client() -> AsyncOpenAI:
+    """Create an AsyncOpenAI client configured for Groq.
 
     Returns:
-        AsyncOpenAI client with OpenRouter base URL
+        AsyncOpenAI client with Groq base URL
 
     Raises:
-        ConfigurationError: If OPENROUTER_API_KEY is not set
+        ConfigurationError: If GROQ_API_KEY is not set
     """
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
-        raise ConfigurationError("OPENROUTER_API_KEY environment variable not set")
+        raise ConfigurationError("GROQ_API_KEY environment variable not set")
 
     return AsyncOpenAI(
-        base_url="https://openrouter.ai/api/v1",
+        base_url="https://api.groq.com/openai/v1",
         api_key=api_key
     )
 
@@ -192,8 +192,8 @@ async def generate_response(messages: List[dict], config: AgentConfig) -> str:
         GenerationError: On non-recoverable failure
     """
     try:
-        client = create_openrouter_client()
-        logger.debug(f"Generating response with model {config.model}")
+        client = create_groq_client()
+        logger.debug(f"Generating response with Groq model {config.model}")
         response = await client.chat.completions.create(
             model=config.model,
             messages=messages,
@@ -398,8 +398,8 @@ def create_agent(config: AgentConfig = None) -> AgentState:
         config = AgentConfig()
 
     # Validate environment
-    if not os.getenv("OPENROUTER_API_KEY"):
-        raise ConfigurationError("OPENROUTER_API_KEY environment variable not set")
+    if not os.getenv("GROQ_API_KEY"):
+        raise ConfigurationError("GROQ_API_KEY environment variable not set")
 
     logger.info(f"Creating agent with model: {config.model}")
 
@@ -476,7 +476,7 @@ async def run_cli_async() -> int:
         agent = create_agent()
     except ConfigurationError as e:
         print(f"Configuration error: {e}")
-        print("Please ensure OPENROUTER_API_KEY is set in your .env file.")
+        print("Please ensure GROQ_API_KEY is set in your .env file.")
         return 1
 
     print("Book Assistant (type 'quit' to exit, 'clear' to reset, 'help' for commands)")

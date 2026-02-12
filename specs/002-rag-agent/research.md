@@ -28,8 +28,8 @@ from agents import set_default_openai_client, set_default_openai_api
 
 # Configure OpenRouter as backend
 client = AsyncOpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY")
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.getenv("GROQ_API_KEY")
 )
 set_default_openai_client(client)
 set_default_openai_api("chat_completions")
@@ -264,7 +264,7 @@ tenacity = ">=8.0.0"
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| OPENROUTER_API_KEY | Yes | OpenRouter API key for LLM access |
+| GROQ_API_KEY | Yes | OpenRouter API key for LLM access |
 | COHERE_API_KEY | Yes | Cohere API key (used by retrieval.py) |
 | QDRANT_URL | Yes | Qdrant Cloud cluster URL |
 | QDRANT_API_KEY | Yes | Qdrant Cloud API key |
@@ -281,8 +281,8 @@ tenacity = ">=8.0.0"
 - **Both functions are available and importable**
 
 ### T004: OpenRouter API Test
-- **Status**: ⏳ PENDING - Requires OPENROUTER_API_KEY in .env
-- **Action**: User must add OPENROUTER_API_KEY to fullstack/backend/.env
+- **Status**: ⏳ PENDING - Requires GROQ_API_KEY in .env
+- **Action**: User must add GROQ_API_KEY to fullstack/backend/.env
 
 ### T005: Tokenizer Selection
 - **Status**: ✅ VERIFIED

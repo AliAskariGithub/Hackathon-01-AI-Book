@@ -51,7 +51,7 @@ Implemented complete RAG Agent following the 10-phase task plan:
 
 **Phase 3 (Setup):**
 - Added dependencies: openai>=1.0.0, openai-agents>=0.0.1, tiktoken>=0.5.0, tenacity>=8.0.0
-- Updated .env.example with OPENROUTER_API_KEY
+- Updated .env.example with GROQ_API_KEY
 
 **Phase 4 (Foundational):**
 - Added exception hierarchy: AgentError, RetrievalError, GenerationError, ContextOverflowError, ConfigurationError
@@ -81,7 +81,7 @@ Implemented complete RAG Agent following the 10-phase task plan:
 - Impact: Complete RAG agent implementation with CLI and programmatic API
 - Tests: 20/20 passed (34% coverage - integration tests need live API)
 - Files: 2 created (agent.py, test_agent.py), 5 modified
-- Next prompts: Add OPENROUTER_API_KEY to run live validation (T030, T035, T038, T045)
+- Next prompts: Add GROQ_API_KEY to run live validation (T030, T035, T038, T045)
 - Reflection: Clean implementation following task plan; integration tests deferred pending API key
 
 ## Evaluation notes (flywheel)
@@ -89,4 +89,4 @@ Implemented complete RAG Agent following the 10-phase task plan:
 - Failure modes observed: Network connectivity issue on first T001 attempt (retry succeeded)
 - Graders run and results (PASS/FAIL): pytest 20/20 PASS
 - Prompt variant (if applicable): N/A
-- Next experiment (smallest change to try): Run full validation tests after user adds OPENROUTER_API_KEY
+- Next experiment (smallest change to try): Run full validation tests after user adds GROQ_API_KEY

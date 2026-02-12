@@ -230,7 +230,7 @@ A reader asks a question unrelated to the book content (e.g., "What's the weathe
 - **FR-024**: Backend MUST include app.py as entry point for Hugging Face Spaces
 - **FR-025**: Widget MUST be bundled with Docusaurus production build
 - **FR-026**: Backend MUST validate all required environment variables on startup and fail fast with clear error messages if any are missing
-  - Required vars: `COHERE_API_KEY`, `QDRANT_URL`, `QDRANT_API_KEY`, `OPENROUTER_API_KEY`, `BOOK_BASE_URL`
+  - Required vars: `COHERE_API_KEY`, `QDRANT_URL`, `QDRANT_API_KEY`, `GROQ_API_KEY`, `BOOK_BASE_URL`
   - Optional vars: `ALLOWED_ORIGINS` (defaults to localhost:3000)
 
 ### State Management Strategy
@@ -290,7 +290,7 @@ A reader asks a question unrelated to the book content (e.g., "What's the weathe
 - Docusaurus book frontend already exists in `fullstack/frontend-book/` and is fully functional
 - Spec-1 RAG Book Embeddings is complete - Qdrant vector database is populated with book content
 - Spec-2 RAG Agent is fully implemented with `process_query()` function available in `fullstack/backend/agent.py`
-- OPENROUTER_API_KEY and other API keys are available for LLM inference
+- GROQ_API_KEY and other API keys are available for LLM inference
 
 **Implementation Context**
 - Backend API (`app.py`) MUST import and reuse existing `agent.py` - no duplication of agent logic
@@ -341,7 +341,7 @@ python -c "from agent import process_query; print('OK')"                   # Spe
 - `COHERE_API_KEY` - Cohere API key for embeddings
 - `QDRANT_URL` - Qdrant Cloud cluster URL
 - `QDRANT_API_KEY` - Qdrant Cloud API key
-- `OPENROUTER_API_KEY` - OpenRouter API key for LLM
+- `GROQ_API_KEY` - OpenRouter API key for LLM
 - `BOOK_BASE_URL` - Deployed book base URL for citation transformation
 - `ALLOWED_ORIGINS` - (optional) Comma-separated CORS origins
 

@@ -4,6 +4,7 @@
 @font-face {
   font-family: 'Archivo';
   font-style: normal;
+  font-variant: uppercase;
   font-weight: 400;
   font-display: swap;
   src: url('/fonts/Archivo/Archivo-Regular.woff2') format('woff2');

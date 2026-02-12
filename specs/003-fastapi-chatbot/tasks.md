@@ -42,7 +42,7 @@
   - ChatMessage (role, content, timestamp, citations)
   - Citation (title, url, score)
   - ErrorResponse with error_type enum: `network|backend|timeout|rate_limit` (matches spec FR-014)
-- [x] T005 [P] Create `fullstack/backend/validate_config.py` checking: COHERE_API_KEY, QDRANT_URL, QDRANT_API_KEY, OPENROUTER_API_KEY, BOOK_BASE_URL
+- [x] T005 [P] Create `fullstack/backend/validate_config.py` checking: COHERE_API_KEY, QDRANT_URL, QDRANT_API_KEY, GROQ_API_KEY, BOOK_BASE_URL
 - [x] T006 Create `fullstack/backend/app.py` with FastAPI app, CORS middleware:
   ```python
   ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "").split(",") or [
@@ -210,7 +210,7 @@
 
 ## Phase 14: Deployment
 
-- [ ] T049 Deploy backend to HF Space: upload app.py, api_models.py, validate_config.py, agent.py, retrieval.py, models.py, requirements.txt. Configure secrets: COHERE_API_KEY, QDRANT_URL, QDRANT_API_KEY, OPENROUTER_API_KEY, BOOK_BASE_URL, ALLOWED_ORIGINS
+- [ ] T049 Deploy backend to HF Space: upload app.py, api_models.py, validate_config.py, agent.py, retrieval.py, models.py, requirements.txt. Configure secrets: COHERE_API_KEY, QDRANT_URL, QDRANT_API_KEY, GROQ_API_KEY, BOOK_BASE_URL, ALLOWED_ORIGINS
 - [ ] T050 Update docusaurus.config.js with production backendUrl
 - [ ] T051 Deploy frontend to GitHub Pages
 - [ ] T052 Validate: Full E2E production test

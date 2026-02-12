@@ -16,8 +16,8 @@ This implementation uses the **OpenAI Agents SDK** with a `base_url` override to
 
 **Configuration**:
 ```
-base_url: https://openrouter.ai/api/v1
-api_key: OPENROUTER_API_KEY (environment variable)
+base_url: https://api.groq.com/openai/v1
+api_key: GROQ_API_KEY (environment variable)
 ```
 
 ### Model Specification
@@ -192,7 +192,7 @@ As a user, I want the agent to gracefully handle questions outside the book's do
 - **models.py**: Reuse `RetrievalResult` dataclass from Spec-1
 
 ### API Keys (Environment Variables)
-- **OPENROUTER_API_KEY**: Required for LLM access via OpenRouter
+- **GROQ_API_KEY**: Required for LLM access via OpenRouter
 - **COHERE_API_KEY**: Required for query embedding generation (used by retrieval.py)
 - **QDRANT_URL**: Qdrant Cloud cluster URL
 - **QDRANT_API_KEY**: Qdrant Cloud API key

@@ -11,7 +11,7 @@
 - API keys configured:
   - `COHERE_API_KEY` (embeddings)
   - `QDRANT_URL` and `QDRANT_API_KEY` (vector DB)
-  - `OPENROUTER_API_KEY` (LLM)
+  - `GROQ_API_KEY` (LLM)
 
 ## Quick Start (5 minutes)
 
@@ -107,7 +107,7 @@ fullstack/
 COHERE_API_KEY=your-cohere-key
 QDRANT_URL=https://your-cluster.qdrant.io
 QDRANT_API_KEY=your-qdrant-key
-OPENROUTER_API_KEY=sk-or-v1-your-key
+GROQ_API_KEY=sk-or-v1-your-key
 
 # New for Spec-3
 BOOK_BASE_URL=https://aliaskarigithub.github.io
@@ -149,7 +149,7 @@ In Space Settings → Repository secrets:
 - `COHERE_API_KEY`
 - `QDRANT_URL`
 - `QDRANT_API_KEY`
-- `OPENROUTER_API_KEY`
+- `GROQ_API_KEY`
 - `BOOK_BASE_URL`
 
 ### 4. Verify Deployment

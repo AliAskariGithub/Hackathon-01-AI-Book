@@ -26,7 +26,7 @@
 **Goal**: Discover and validate technical assumptions before implementation.
 
 - [x] T003 Discover OpenAI Agents SDK API: Install `pip install openai-agents` and document actual import pattern (may differ from assumption). Record available functions in research.md
-- [ ] T004 Test OpenRouter API with target model: Requires OPENROUTER_API_KEY in .env (user action needed)
+- [ ] T004 Test OpenRouter API with target model: Requires GROQ_API_KEY in .env (user action needed)
 - [x] T005 Compare tiktoken vs transformers tokenizer accuracy for Llama 3.2 and document choice with rationale
 - [x] T005b Implement chosen tokenizer wrapper function based on T005 findings (creates reusable count_tokens pattern for T020)
 - [x] T006 Document all findings in `specs/2-rag-agent/research.md` including SDK API, tokenizer choice, and fallback decisions
@@ -38,7 +38,7 @@
 **Goal**: Configure environment and dependencies.
 
 - [x] T007 Add dependencies to `fullstack/backend/pyproject.toml`: openai-agents (or fallback per T003), openai>=1.0.0, tiktoken>=0.5.0 (or transformers per T005), tenacity>=8.0.0, pytest-cov>=4.0.0
-- [x] T008 Update `fullstack/backend/.env.example` with OPENROUTER_API_KEY=sk-or-v1-your-key-here
+- [x] T008 Update `fullstack/backend/.env.example` with GROQ_API_KEY=sk-or-v1-your-key-here
 - [x] T009 Run `cd fullstack/backend && pip install -e .` and verify installation succeeds
 
 ---
