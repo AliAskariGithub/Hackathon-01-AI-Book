@@ -27,7 +27,7 @@ const COLD_START_THRESHOLD = 10000;
  */
 export function useChatApi() {
   const { siteConfig } = useDocusaurusContext();
-  const backendUrl = siteConfig.customFields?.BACKEND_URL || 'http://localhost:8000'; // Hardcoded backend URL per spec
+  const backendUrl = 'https://aliaskariface-backend-chatbot-book.hf.space'; // Hardcoded backend URL per spec
 
   // Track cold start state for UI feedback
   const [isColdStart, setIsColdStart] = useState(false);
