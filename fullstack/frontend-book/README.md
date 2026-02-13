@@ -1,17 +1,25 @@
 # AI-Spec Driven Book - Frontend
 
-This is the frontend for the AI-Spec Driven Book, a comprehensive educational resource for AI and Computer Science students learning about robotics, specifically focusing on ROS 2 (Robot Operating System 2) as middleware for humanoid robot control.
+A modern, accessible learning platform for Physical AI and Humanoid Robotics education. Built with Docusaurus 3.9.2 and React 19, this platform provides comprehensive educational content covering the full humanoid autonomy pipeline from ROS 2 fundamentals to Vision-Language-Action systems.
+
+**Live Platform**: https://ai-spec-driven-book-six.vercel.app/
 
 ## Overview
 
-The AI-Spec Driven Book provides educational content that explains the purpose and architecture of robotic middleware for humanoid robot control. It teaches core robotic communication concepts including nodes, topics, and services with practical examples, and helps users learn how to implement communication nodes using appropriate programming interfaces for AI-to-controller communication.
+The AI-Spec Driven Book is a fullstack educational platform teaching Physical AI and Humanoid Robotics through spec-driven development. The frontend delivers 6 comprehensive learning modules with an embedded RAG-powered chatbot for instant assistance.
+
+### Core Mission
+Bridge the gap between digital AI and embodied intelligence by providing a comprehensive curriculum covering robotics middleware, kinematics, simulation, perception systems, NVIDIA Isaac, and VLA systems.
 
 ## Features
 
-- **Module-based Learning**: Organized into progressive modules starting with fundamental concepts
-- **Practical Examples**: Real-world examples demonstrating robotic middleware concepts
-- **AI Integration**: Focus on connecting AI agents to robot systems
-- **Humanoid Robotics**: Specialized content for humanoid robot models and control
+- **6 Comprehensive Modules**: Progressive learning path from ROS 2 basics to advanced VLA systems
+- **Embedded RAG Chatbot**: AI-powered assistant with conversational context management
+- **Accessibility-First**: WCAG 2.1 AA compliant with semantic HTML, ARIA labels, keyboard navigation
+- **Internationalization**: English + Urdu with RTL support
+- **Dark/Light Mode**: System-aware theme switching with smooth transitions
+- **Responsive Design**: Optimized for mobile, tablet, and desktop
+- **Performance Optimized**: Code splitting, lazy loading, CDN delivery via Vercel
 
 ## Getting Started
 
@@ -20,6 +28,15 @@ The AI-Spec Driven Book provides educational content that explains the purpose a
 - Node.js (version 18 or higher)
 - npm or yarn package manager
 - Git for version control
+
+### Tech Stack
+
+- **Framework**: Docusaurus 3.9.2 (React-based static site generator)
+- **UI Library**: React 19.0.0
+- **Animation**: Framer Motion 12.34.0
+- **Icons**: Lucide React 0.562.0
+- **Styling**: CSS Modules + Custom CSS
+- **Deployment**: Vercel (with automatic CI/CD)
 
 ### Installation
 
@@ -61,20 +78,64 @@ npm run serve
 
 ## Project Structure
 
-- `docs/` - Contains all the educational content in Markdown format
-- `src/` - Custom React components and CSS
-- `static/` - Static assets like images
-- `docusaurus.config.js` - Main Docusaurus configuration
-- `sidebars.js` - Navigation sidebar configuration
+```
+frontend-book/
+├── docs/                      # Educational content (6 modules)
+│   ├── module-1/             # Robotic Nervous System
+│   ├── module-2/             # Robot Kinematics & Structure
+│   ├── module-3/             # Digital Twin Simulation
+│   ├── module-4/             # Perception Systems
+│   ├── module-5/             # AI-Robot Brain (NVIDIA Isaac)
+│   └── module-6/             # Vision-Language-Action (VLA)
+├── src/
+│   ├── components/           # React components
+│   │   ├── Chatbot/         # RAG chatbot integration
+│   │   ├── UI/              # Reusable UI components
+│   │   └── Theme/           # Theme system components
+│   ├── css/                 # Global styles
+│   └── pages/               # Custom pages
+├── static/                   # Static assets (images, icons)
+├── docusaurus.config.js     # Main configuration
+├── sidebars.js              # Navigation structure
+└── package.json             # Dependencies
+```
 
-## Modules
+## Learning Modules
 
-### Module 1: The Robotic Nervous System
+### Module 1: Robotic Nervous System
+- ROS 2 fundamentals and middleware architecture
+- Core communication concepts (nodes, topics, services)
+- AI agents and robot models integration
 
-This module covers:
-1. Robotic Middleware Fundamentals
-2. Core Communication Concepts
-3. AI Agents and Robot Models
+### Module 2: Robot Kinematics & Structure
+- Links, joints, and coordinate frames
+- Forward and inverse kinematics
+- URDF mapping between real and simulated robots
+- Joint constraints and motion limits
+
+### Module 3: Digital Twin Simulation
+- Gazebo simulation setup and configuration
+- Unity visualization integration
+- Physics and collision modeling
+- Navigation and motion planning
+
+### Module 4: Perception Systems
+- Robot camera models and calibration
+- LiDAR fundamentals and processing
+- IMU sensor fusion techniques
+- Building complete perception pipelines
+
+### Module 5: AI-Robot Brain (NVIDIA Isaac)
+- Isaac Sim overview and architecture
+- Synthetic data generation for training
+- Hardware-accelerated VSLAM with Isaac ROS
+- Nav2 path planning for humanoid mobile robots
+
+### Module 6: Vision-Language-Action (VLA)
+- VLA fundamentals and architecture
+- Voice-to-action system implementation
+- Cognitive planning with language models
+- Executing language-based action plans
 
 ## Contributing
 
@@ -85,9 +146,50 @@ To contribute content or improvements:
 3. Make your changes
 4. Submit a pull request
 
+## Key Components
+
+### Chatbot Integration
+- **ChatContext.jsx**: State management for conversation history
+- **ChatPanel.jsx**: Main chat interface with message rendering
+- **ChatMessage.jsx**: Individual message component with citations
+- **useChatApi.js**: API integration with backend RAG service
+
+### UI Components
+- **AccessibleButton**: WCAG-compliant button component
+- **Card, FeatureCard**: Content presentation components
+- **LearningObjectives, LearningOutcomes**: Educational components
+- **IsaacHighlight**: Specialized component for NVIDIA Isaac content
+
+### Theme System
+- **ThemeToggleButton**: Dark/light mode switcher
+- **ThemeSystem**: System-aware theme management
+- Smooth transitions between themes
+- Persistent user preferences
+
 ## Deployment
 
-This site is designed to be deployed to GitHub Pages. The configuration in `docusaurus.config.js` includes settings for GitHub Pages deployment.
+This site is deployed to Vercel with automatic CI/CD:
+- **Production**: https://ai-spec-driven-book-six.vercel.app/
+- **Preview**: Automatic preview deployments for pull requests
+- **CDN**: Global content delivery for optimal performance
+
+## Accessibility
+
+WCAG 2.1 AA compliant with:
+- Semantic HTML structure
+- ARIA labels and roles
+- Keyboard navigation support
+- Screen reader optimization
+- High contrast ratios (4.5:1 minimum)
+- Focus indicators on all interactive elements
+
+## Performance
+
+- Code splitting for faster initial loads
+- Lazy loading for images and heavy components
+- Optimized asset delivery via Vercel CDN
+- Minimal bundle size with tree shaking
+- Service worker for offline support
 
 ## License
 

@@ -206,5 +206,37 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 - `history/adr/` — Architecture Decision Records
 - `.specify/` — SpecKit Plus templates and scripts
 
+## Project-Specific Context
+
+### AI-Spec Driven Book: Physical AI & Humanoid Robotics Platform
+
+This is a fullstack educational platform teaching Physical AI and Humanoid Robotics through spec-driven development.
+
+**Architecture:**
+- `fullstack/frontend-book/` — Docusaurus 3.9.2 learning platform with embedded RAG chatbot
+- `fullstack/backend/` — FastAPI RAG chatbot service (Groq LLM + Qdrant vector DB)
+- `specs/` — Comprehensive feature specifications for all modules and components
+- Live deployment: https://ai-spec-driven-book-six.vercel.app/
+
+**Learning Modules (6 total):**
+1. Robotic Nervous System (ROS 2, middleware, AI agents)
+2. Robot Kinematics & Structure (links, joints, URDF, kinematics)
+3. Digital Twin Simulation (Gazebo, Unity, physics, navigation)
+4. Perception Systems (cameras, LiDAR, IMU, sensor fusion)
+5. AI-Robot Brain (NVIDIA Isaac Sim, VSLAM, Nav2)
+6. Vision-Language-Action (VLA fundamentals, voice-to-action, cognitive planning)
+
+**Tech Stack:**
+- Frontend: React 19, Docusaurus 3.9.2, Framer Motion, Lucide React
+- Backend: FastAPI, Groq API (LLMs), Cohere (embeddings), Qdrant (vector DB)
+- Features: Dark/light mode, i18n (English/Urdu with RTL), WCAG 2.1 AA accessibility, embedded chatbot
+
+**Key Principles:**
+- Spec-first development (non-negotiable)
+- Technical accuracy with source traceability
+- Clean architecture (no hardcoded secrets, use .env)
+- Modular, testable code
+- Accessibility-first design
+
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.

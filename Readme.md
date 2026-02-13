@@ -119,6 +119,27 @@ Perfect on mobile, tablet, desktop
 </td>
 <td width="33%" align="center">
 
+### 🤖 **AI-Powered Chatbot**
+RAG-based assistant for instant help
+
+</td>
+</tr>
+
+<tr>
+<td width="33%" align="center">
+
+### 🌍 **Internationalization**
+English + Urdu with RTL support
+
+</td>
+<td width="33%" align="center">
+
+### 🌓 **Dark Mode**
+System-aware theme switching
+
+</td>
+<td width="33%" align="center">
+
 ### 🔄 **Interactive**
 Engaging learning components
 
@@ -189,26 +210,38 @@ Engaging learning components
 - Communication patterns
 - AI agent integration
 
-### 📐 **Module 2: Digital Twin**
-- Simulation fundamentals
-- Gazebo environments
-- Unity integration
-- Physics modeling
+### 📐 **Module 2: Robot Kinematics & Structure**
+- Links, joints, coordinate frames
+- Forward/inverse kinematics
+- URDF mapping
+- Joint constraints & motion limits
+
+### 🎮 **Module 3: Digital Twin Simulation**
+- Gazebo simulation setup
+- Unity visualization
+- Physics & collision modeling
+- Navigation & motion planning
 
 </td>
 <td width="50%">
 
-### 🚀 **Module 3: AI-Robot Brain**
-- NVIDIA Isaac Sim
-- Perception systems
-- Localization techniques
-- Navigation planning
+### 👁️ **Module 4: Perception Systems**
+- Robot camera models
+- LiDAR fundamentals
+- IMU sensor fusion
+- Building perception pipelines
 
-### 🗣️ **Module 4: Vision-Language-Action**
+### 🚀 **Module 5: AI-Robot Brain (NVIDIA Isaac)**
+- Isaac Sim architecture
+- Synthetic data generation
+- Hardware-accelerated VSLAM
+- Nav2 path planning
+
+### 🗣️ **Module 6: Vision-Language-Action (VLA)**
 - VLA fundamentals
 - Voice-to-action systems
 - Cognitive planning
-- Multimodal AI
+- Executing language plans
 
 </td>
 </tr>
@@ -253,20 +286,26 @@ graph TD
 
 <div align="center">
 
-### Core Technologies
+### Frontend Technologies
 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Docusaurus](https://img.shields.io/badge/Docusaurus-3ECC5F?style=for-the-badge&logo=Docusaurus&logoColor=white)](https://docusaurus.io/)
+[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Docusaurus](https://img.shields.io/badge/Docusaurus_3.9-3ECC5F?style=for-the-badge&logo=Docusaurus&logoColor=white)](https://docusaurus.io/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+
+### Backend Technologies
+
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?style=for-the-badge&logo=qdrant&logoColor=white)](https://qdrant.tech/)
+
+### AI & ML Stack
+
+[![Groq](https://img.shields.io/badge/Groq_API-F55036?style=for-the-badge&logo=ai&logoColor=white)](https://groq.com/)
+[![Cohere](https://img.shields.io/badge/Cohere-39594C?style=for-the-badge&logo=cohere&logoColor=white)](https://cohere.com/)
+
+### Deployment
+
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
-
-### Styling & Design
-
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-
-### Build & Deploy
-
-[![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white)](https://webpack.js.org/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 
 </div>
