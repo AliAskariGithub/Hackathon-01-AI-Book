@@ -104,6 +104,95 @@ def create_groq_client() -> AsyncOpenAI:
 
 
 # =============================================================================
+# Book Structure Constants & Query Helpers
+# =============================================================================
+BOOK_MODULES: List[RetrievalResult] = [
+    RetrievalResult(
+        chunk_id="mod-intro",
+        text="Introduction: Foundations of Physical AI covers embodied intelligence, physical AI fundamentals, and the humanoid robotics autonomy pipeline.",
+        score=1.0,
+        url="/docs/intro",
+        title="Introduction: Foundations of Physical AI",
+        chunk_index=0
+    ),
+    RetrievalResult(
+        chunk_id="mod-1",
+        text="Module 1: The Robotic Nervous System covers ROS 2 fundamentals, middleware architecture, computational graphs (nodes, topics, services, actions), and AI agents integration.",
+        score=1.0,
+        url="/docs/module-1/index",
+        title="Module 1: The Robotic Nervous System",
+        chunk_index=0
+    ),
+    RetrievalResult(
+        chunk_id="mod-2",
+        text="Module 2: Robot Kinematics & Physical Structure covers robot links, joints, coordinate frames, forward and inverse kinematics, joint constraints, and URDF modeling for real and simulated robots.",
+        score=1.0,
+        url="/docs/module-2/index",
+        title="Module 2: Robot Kinematics & Physical Structure",
+        chunk_index=0
+    ),
+    RetrievalResult(
+        chunk_id="mod-3",
+        text="Module 3: The Digital Twin covers Gazebo simulation setup, physics & collision modeling, navigation and motion planning, and Unity visualization.",
+        score=1.0,
+        url="/docs/module-3/index",
+        title="Module 3: The Digital Twin",
+        chunk_index=0
+    ),
+    RetrievalResult(
+        chunk_id="mod-4",
+        text="Module 4: Perception Systems for Robots covers robot camera models (RGB, Depth, Stereo), LiDAR fundamentals, IMU data and sensor fusion, and building perception pipelines in ROS 2.",
+        score=1.0,
+        url="/docs/module-4/index",
+        title="Module 4: Perception Systems for Robots",
+        chunk_index=0
+    ),
+    RetrievalResult(
+        chunk_id="mod-5",
+        text="Module 5: The AI-Robot Brain (NVIDIA Isaac) covers NVIDIA Isaac Sim overview and architecture, synthetic data generation, Isaac ROS hardware-accelerated VSLAM, and Nav2 path planning.",
+        score=1.0,
+        url="/docs/module-5/index",
+        title="Module 5: The AI-Robot Brain (NVIDIA Isaac)",
+        chunk_index=0
+    ),
+    RetrievalResult(
+        chunk_id="mod-6",
+        text="Module 6: Vision–Language–Action (VLA) covers VLA fundamentals, voice-to-action systems, cognitive planning, and executing language plans in ROS 2.",
+        score=1.0,
+        url="/docs/module-6/index",
+        title="Module 6: Vision–Language–Action (VLA)",
+        chunk_index=0
+    ),
+]
+
+
+def is_overview_query(query: str) -> bool:
+    """Check if query is asking for book overview, contents, or table of contents."""
+    q = query.lower()
+    patterns = [
+        "content of the book", "contents of the book", "content of book",
+        "table of content", "table of contents",
+        "list the content", "list content", "list the chapters", "list chapters",
+        "list the modules", "list modules", "list all modules",
+        "what does this book cover", "what is this book about", "book overview",
+        "what modules", "what topics are covered", "outline of the book",
+        "summary of the book", "index of the book", "show me the modules",
+        "chapters of the book", "modules of the book"
+    ]
+    return any(p in q for p in patterns)
+
+
+def is_greeting_or_identity_query(query: str) -> bool:
+    """Check if query is a simple greeting or identity question."""
+    q = query.strip().lower()
+    greetings = {"hi", "hello", "hey", "hola", "salam", "hi there", "hello there", "good morning", "good evening", "good afternoon"}
+    if q in greetings:
+        return True
+    identity_patterns = ["who are you", "what are you", "what is your name", "what can you do", "how can you help"]
+    return any(p in q for p in identity_patterns)
+
+
+# =============================================================================
 # Retrieval Integration (T021, T022)
 # =============================================================================
 async def retrieve_context(
@@ -125,8 +214,22 @@ async def retrieve_context(
         RetrievalError: If vector search fails
     """
     logger.debug(f"Retrieving context for: {query}")
+
+    # Fast path: simple greetings or pure identity questions do not require vector search
+    if is_greeting_or_identity_query(query) and not is_overview_query(query):
+        return RetrievalContext(
+            query=query,
+            results=[],
+            total_tokens=0
+        )
+
     try:
         results = search(query, top_k=top_k, threshold=threshold)
+
+        # If vector search yielded no results for an overview query, provide book modules
+        if not results and is_overview_query(query):
+            results = BOOK_MODULES
+
         total_tokens = sum(count_tokens(r.text) for r in results)
         logger.debug(f"Retrieved {len(results)} results, {total_tokens} tokens")
         return RetrievalContext(
@@ -141,15 +244,6 @@ async def retrieve_context(
 def format_context_for_prompt(context: RetrievalContext) -> str:
     """Format retrieved context for LLM prompt.
 
-    Format:
-    Context from the book:
-
-    [1] Source: {title} ({url})
-    {text}
-
-    [2] Source: {title} ({url})
-    {text}
-
     Args:
         context: Retrieved context with results
 
@@ -157,7 +251,11 @@ def format_context_for_prompt(context: RetrievalContext) -> str:
         Formatted context string
     """
     if not context.results:
-        return "No relevant context found in the book."
+        return (
+            "No specific excerpt retrieved from vector search. "
+            "If the user is greeting you, asking about your identity, or asking for the book overview or table of contents, "
+            "answer helpfully using your knowledge of the book structure without saying you lack information."
+        )
 
     lines = ["Context from the book:\n"]
     for i, r in enumerate(context.results, 1):
@@ -216,7 +314,7 @@ def extract_citations(response: str, context: RetrievalContext) -> List[Citation
     """Extract citations from response text.
 
     Parses pattern: [Source: {title}]({url}) or [{title}]({url})
-    Validates against available sources in context.
+    Validates against available sources in context or core book modules.
 
     Args:
         response: LLM response text
@@ -225,10 +323,16 @@ def extract_citations(response: str, context: RetrievalContext) -> List[Citation
     Returns:
         List of validated Citation objects
     """
-    if not context.results or not response:
+    if not response:
         return []
 
-    available_results_by_url = {r.url.strip(): r for r in context.results}
+    # Include context results as well as core book modules so overview answers have clickable links
+    candidates = list(context.results) if context.results else []
+    for m in BOOK_MODULES:
+        if not any(c.url == m.url for c in candidates):
+            candidates.append(m)
+
+    available_results_by_url = {r.url.strip(): r for r in candidates}
     citations = []
     seen_urls = set()
 
@@ -255,7 +359,7 @@ def extract_citations(response: str, context: RetrievalContext) -> List[Citation
 
     # Fallback: check if context URLs appear directly in the response text
     if not citations:
-        for r in context.results:
+        for r in candidates:
             if r.url and r.url in response and r.url not in seen_urls:
                 citations.append(Citation(
                     title=r.title,
