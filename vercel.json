@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm --prefix fullstack/frontend-book run build",
+  "outputDirectory": "fullstack/frontend-book/build",
+  "installCommand": "npm --prefix fullstack/frontend-book install",
+  "framework": null
+}

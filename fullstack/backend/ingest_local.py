@@ -300,7 +300,8 @@ def ingest_local_book(docs_dir: str, collection_name: str = COLLECTION_NAME) -> 
     co = cohere.Client(os.getenv("COHERE_API_KEY"))
     qdrant = QdrantClient(
         url=os.getenv("QDRANT_URL"),
-        api_key=os.getenv("QDRANT_API_KEY")
+        api_key=os.getenv("QDRANT_API_KEY"),
+        check_compatibility=False
     )
 
     # Initialize collection
@@ -364,7 +365,9 @@ def ingest_local_book(docs_dir: str, collection_name: str = COLLECTION_NAME) -> 
 
 
 if __name__ == "__main__":
-    docs_dir = "C:/Hackathons/hackathon-ai-book/fullstack/frontend-book/docs"
+    import sys
+    default_docs = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend-book/docs"))
+    docs_dir = sys.argv[1] if len(sys.argv) > 1 else os.getenv("DOCS_DIR", default_docs)
 
     logger.info(f"Starting local ingestion from {docs_dir}")
     result = ingest_local_book(docs_dir)

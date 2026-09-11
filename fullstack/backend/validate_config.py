@@ -7,6 +7,10 @@ Fails fast with clear error messages per spec FR-026.
 import os
 import sys
 from typing import List, Optional
+from dotenv import load_dotenv
+
+# Ensure environment variables are loaded
+load_dotenv()
 
 
 # Required environment variables (must be set)
@@ -83,7 +87,7 @@ def print_config_status() -> None:
     print("\nRequired Variables:")
     for var in REQUIRED_VARS:
         value = os.getenv(var)
-        status = "✓ SET" if value else "✗ MISSING"
+        status = "[OK] SET" if value else "[MISSING]"
         # Mask sensitive values
         display = f"{value[:4]}..." if value and len(value) > 4 else value
         print(f"  {var}: {status} ({display})")
@@ -97,7 +101,6 @@ def print_config_status() -> None:
 
 if __name__ == "__main__":
     """CLI for checking configuration."""
-    from dotenv import load_dotenv
     load_dotenv()
 
     print_config_status()
@@ -105,8 +108,8 @@ if __name__ == "__main__":
 
     try:
         validate_config()
-        print("✓ All required configuration is valid!")
+        print("[OK] All required configuration is valid!")
         sys.exit(0)
     except ConfigurationError as e:
-        print(f"✗ Configuration Error:\n{e}")
+        print(f"[ERROR] Configuration Error:\n{e}")
         sys.exit(1)

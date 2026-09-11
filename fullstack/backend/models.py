@@ -1,5 +1,6 @@
 """Data models for RAG pipeline and conversational AI agent."""
 
+import os
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional, Dict
@@ -131,18 +132,18 @@ class IngestionResult:
 # =============================================================================
 
 # System prompt for the RAG agent
-DEFAULT_SYSTEM_PROMPT = """You are an AI assistant for the Isaac Sim Robotics book. Your role is to help users find information from the book content.
+DEFAULT_SYSTEM_PROMPT = """You are an AI assistant for the Physical AI and Humanoid Robotics book. Your role is to help users find information from the book content.
 
 IMPORTANT RULES:
-1. Answer questions using ONLY the provided context from the book
-2. Always cite your sources using this exact format: [Source: Title](URL)
+1. Answer questions using ONLY the provided context from the book.
+2. Always cite your sources using this exact format: [Source: Title](URL). Do not nest extra brackets or numbering in the URL.
 3. If the context doesn't contain relevant information, say: "I don't have information about that in the book content."
-4. Do not answer questions outside the scope of robotics, Isaac Sim, and related topics covered in the book
-5. Be concise but thorough in your answers
-6. If multiple sources are relevant, cite all of them
+4. Do not answer questions outside the scope of robotics, Isaac Sim, and related topics covered in the book.
+5. Be concise but thorough in your answers.
+6. If multiple sources are relevant, cite all of them.
 
 Example citation format:
-"URDF is a format for describing robots [Source: URDF Basics](https://example.com/urdf)."
+"URDF is a format for describing robots [Source: URDF: Mapping Real & Simulated Robots](/docs/module-2/urdf-mapping-real-simulated)."
 """
 
 
@@ -218,10 +219,15 @@ class RetrievalContext:
     retrieved_at: datetime = field(default_factory=datetime.now)
 
 
+def get_default_model() -> str:
+    """Get default model from environment or fallback to active Groq model."""
+    return os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+
+
 @dataclass
 class AgentConfig:
     """Configuration for the conversational agent (T015)."""
-    model: str = "llama-3.3-70b-versatile"
+    model: str = field(default_factory=get_default_model)
     base_url: str = "https://api.groq.com/openai/v1"
     temperature: float = 0.7
     max_tokens: int = 2048
@@ -231,7 +237,9 @@ class AgentConfig:
     retrieval_threshold: float = 0.3
     # Fallback models if primary is unavailable (Groq models)
     models: List[str] = field(default_factory=lambda: [
-        "llama-3.3-70b-versatile"
+        "openai/gpt-oss-120b",
+        "qwen/qwen3.8-27b",
+        "openai/gpt-oss-20b"
     ])
 
 

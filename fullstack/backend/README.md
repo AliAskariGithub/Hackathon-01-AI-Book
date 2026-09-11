@@ -1,3 +1,13 @@
+---
+title: Physical AI Book Chatbot API
+emoji: 🤖
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # AI-Spec Driven Book - Backend
 
 FastAPI-based RAG (Retrieval-Augmented Generation) chatbot service providing intelligent, context-aware assistance for the AI-Spec Driven Book learning platform.

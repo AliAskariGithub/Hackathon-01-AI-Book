@@ -35,38 +35,42 @@ def test_chat_endpoint():
             data = response.json()
 
             if data.get("error"):
-                print(f"❌ Error: {data['error']}")
+                print(f"[ERROR] Error: {data['error']}")
                 print(f"Conversation ID: {data.get('conversation_id')}")
                 return False
 
-            print("✅ Success!")
+            print("[SUCCESS] Response received!")
             print(f"\nConversation ID: {data.get('conversation_id')}")
-            print(f"\nAnswer:\n{data.get('answer')}")
+            answer = data.get('answer', '')
+            print(f"\nAnswer:\n{answer.encode('ascii', 'ignore').decode()}")
 
             citations = data.get('citations', [])
             if citations:
-                print(f"\n📚 Citations ({len(citations)}):")
+                print(f"\n[CITATIONS] ({len(citations)}):")
                 for i, citation in enumerate(citations, 1):
-                    print(f"  {i}. {citation['title']}")
+                    title = citation.get('title', '').encode('ascii', 'ignore').decode()
+                    print(f"  {i}. {title}")
                     print(f"     URL: {citation['url']}")
-                    print(f"     Score: {citation['score']:.3f}")
+                    score = citation.get('score')
+                    if score is not None:
+                        print(f"     Score: {score:.3f}")
             else:
-                print("\n⚠️  No citations found")
+                print("\n[WARN] No citations found")
 
             return True
         else:
-            print(f"❌ HTTP Error: {response.status_code}")
+            print(f"[ERROR] HTTP Error: {response.status_code}")
             print(f"Response: {response.text}")
             return False
 
     except requests.exceptions.Timeout:
-        print("❌ Request timed out after 30 seconds")
+        print("[ERROR] Request timed out after 30 seconds")
         return False
     except requests.exceptions.ConnectionError as e:
-        print(f"❌ Connection error: {e}")
+        print(f"[ERROR] Connection error: {e}")
         return False
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print(f"[ERROR] Unexpected error: {e}")
         return False
     finally:
         print("\n" + "=" * 60)

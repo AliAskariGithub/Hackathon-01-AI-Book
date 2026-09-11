@@ -161,8 +161,9 @@ def format_context_for_prompt(context: RetrievalContext) -> str:
 
     lines = ["Context from the book:\n"]
     for i, r in enumerate(context.results, 1):
-        lines.append(f"[{i}] Source: {r.title} ({r.url})")
-        lines.append(r.text)
+        lines.append(f"Source: {r.title}")
+        lines.append(f"URL: {r.url}")
+        lines.append(f"Content:\n{r.text}")
         lines.append("")
 
     return "\n".join(lines)
@@ -214,7 +215,7 @@ async def generate_response(messages: List[dict], config: AgentConfig) -> str:
 def extract_citations(response: str, context: RetrievalContext) -> List[Citation]:
     """Extract citations from response text.
 
-    Parses pattern: [Source: {title}]({url})
+    Parses pattern: [Source: {title}]({url}) or [{title}]({url})
     Validates against available sources in context.
 
     Args:
@@ -224,22 +225,44 @@ def extract_citations(response: str, context: RetrievalContext) -> List[Citation
     Returns:
         List of validated Citation objects
     """
-    pattern = r'\[Source:\s*([^\]]+)\]\(([^)]+)\)'
-    matches = re.findall(pattern, response)
+    if not context.results or not response:
+        return []
 
-    # Build lookup from context
-    available_urls = {r.url for r in context.results}
-
+    available_results_by_url = {r.url.strip(): r for r in context.results}
     citations = []
-    for title, url in matches:
-        if url in available_urls:
-            # Find matching result for score
-            result = next((r for r in context.results if r.url == url), None)
+    seen_urls = set()
+
+    # Pattern: [Source: title](url) or [title](url)
+    pattern = r'\[(?:Source:\s*)?([^\]]+)\]\(([^)]+)\)'
+    for title_match, raw_url in re.findall(pattern, response):
+        # Clean any inner brackets or numbers e.g. [1](... or [2]
+        url = re.sub(r'^\[\d+\]\(?', '', raw_url).strip().rstrip(')')
+        clean_title = title_match.strip()
+
+        matched_result = None
+        for cand_url, r in available_results_by_url.items():
+            if url == cand_url or cand_url.endswith(url) or url.endswith(cand_url):
+                matched_result = r
+                break
+
+        if matched_result and matched_result.url not in seen_urls:
             citations.append(Citation(
-                title=title.strip(),
-                url=url,
-                score=result.score if result else 0.0
+                title=clean_title if clean_title else matched_result.title,
+                url=matched_result.url,
+                score=matched_result.score
             ))
+            seen_urls.add(matched_result.url)
+
+    # Fallback: check if context URLs appear directly in the response text
+    if not citations:
+        for r in context.results:
+            if r.url and r.url in response and r.url not in seen_urls:
+                citations.append(Citation(
+                    title=r.title,
+                    url=r.url,
+                    score=r.score
+                ))
+                seen_urls.add(r.url)
 
     logger.debug(f"Extracted {len(citations)} citations from response")
     return citations

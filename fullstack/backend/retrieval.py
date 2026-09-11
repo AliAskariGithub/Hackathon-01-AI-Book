@@ -51,7 +51,8 @@ def search(
     co = cohere.Client(os.getenv("COHERE_API_KEY"))
     qdrant = QdrantClient(
         url=os.getenv("QDRANT_URL"),
-        api_key=os.getenv("QDRANT_API_KEY")
+        api_key=os.getenv("QDRANT_API_KEY"),
+        check_compatibility=False
     )
 
     # Generate query embedding
