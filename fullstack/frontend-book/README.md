@@ -2,7 +2,7 @@
 
 A modern, accessible learning platform for Physical AI and Humanoid Robotics education. Built with Docusaurus 3.9.2 and React 19, this platform provides comprehensive educational content covering the full humanoid autonomy pipeline from ROS 2 fundamentals to Vision-Language-Action systems.
 
-**Live Platform**: https://ai-spec-driven-book-six.vercel.app/
+**Live Platform**: https://ai-powered-book.vercel.app/
 
 ## Overview
 
@@ -169,7 +169,7 @@ To contribute content or improvements:
 ## Deployment
 
 This site is deployed to Vercel with automatic CI/CD:
-- **Production**: https://ai-spec-driven-book-six.vercel.app/
+- **Production**: https://ai-powered-book.vercel.app/
 - **Preview**: Automatic preview deployments for pull requests
 - **CDN**: Global content delivery for optimal performance
 

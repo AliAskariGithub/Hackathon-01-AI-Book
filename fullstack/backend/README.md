@@ -110,10 +110,10 @@ QDRANT_URL=https://your-cluster.qdrant.io
 QDRANT_COLLECTION_NAME=ai_book_embeddings
 
 # CORS Configuration
-ALLOWED_ORIGINS=http://localhost:3000,https://ai-spec-driven-book-six.vercel.app
+ALLOWED_ORIGINS=http://localhost:3000,https://ai-powered-book.vercel.app
 
 # Model Configuration (optional)
-DEFAULT_MODEL=llama-3.3-70b-versatile
+DEFAULT_MODEL=openai/gpt-oss-120b
 EMBEDDING_MODEL=embed-english-v3.0
 
 # Token Budget (optional)

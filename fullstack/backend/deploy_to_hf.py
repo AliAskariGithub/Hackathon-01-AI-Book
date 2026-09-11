@@ -31,8 +31,8 @@ REQUIRED_SECRETS = [
     ("QDRANT_API_KEY", "Qdrant API key"),
     ("GROQ_API_KEY", "Groq API key for LLM inference"),
     ("GROQ_MODEL", "LLM model on Groq (default: openai/gpt-oss-120b)"),
-    ("BOOK_BASE_URL", "Book URL for citation transformation (e.g. https://ai-spec-driven-book-six.vercel.app)"),
-    ("ALLOWED_ORIGINS", "Comma-separated CORS origins (e.g. http://localhost:3000,https://ai-spec-driven-book-six.vercel.app)"),
+    ("BOOK_BASE_URL", "Book URL for citation transformation (e.g. https://ai-powered-book.vercel.app)"),
+    ("ALLOWED_ORIGINS", "Comma-separated CORS origins (e.g. http://localhost:3000,https://ai-powered-book.vercel.app)"),
 ]
 
 
@@ -145,8 +145,8 @@ def main():
     print("     - QDRANT_API_KEY")
     print("     - GROQ_API_KEY")
     print("     - GROQ_MODEL (Value: openai/gpt-oss-120b)")
-    print("     - BOOK_BASE_URL (Value: https://ai-spec-driven-book-six.vercel.app)")
-    print("     - ALLOWED_ORIGINS (Value: http://localhost:3000,http://localhost:8000,https://ai-spec-driven-book-six.vercel.app)")
+    print("     - BOOK_BASE_URL (Value: https://ai-powered-book.vercel.app)")
+    print("     - ALLOWED_ORIGINS (Value: http://localhost:3000,http://localhost:8000,https://ai-powered-book.vercel.app)")
     print()
     print("6. Test your live endpoint:")
     print("   curl https://<YOUR_USERNAME>-<SPACE_NAME>.hf.space/health")

@@ -31,3 +31,7 @@ dev = [
 
 [tool.setuptools]
 py-modules = ["main", "models", "retrieval", "agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+

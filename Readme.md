@@ -10,7 +10,7 @@
 
 <br/>
 
-[![Live Website](https://img.shields.io/badge/🌐_Live_Website-Visit_Now-6C3BAA?style=for-the-badge&logo=vercel)](https://ai-spec-driven-book-six.vercel.app/)
+[![Live Website](https://img.shields.io/badge/🌐_Live_Website-Visit_Now-6C3BAA?style=for-the-badge&logo=vercel)](https://ai-powered-book.vercel.app/)
 
 <br/>
 
@@ -467,7 +467,7 @@ git push origin feature/amazing-feature
 
 ### 🔗 Important Links
 
-[![Website](https://img.shields.io/badge/🌐_Live_Website-Visit-6C3BAA?style=for-the-badge)](https://ai-spec-driven-book-six.vercel.app/)
+[![Website](https://img.shields.io/badge/🌐_Live_Website-Visit-6C3BAA?style=for-the-badge)](https://ai-powered-book.vercel.app/)
 [![GitHub](https://img.shields.io/badge/💻_GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/yourusername/ai-spec-driven-book)
 
 <br/>
@@ -540,7 +540,7 @@ If this project helps you learn and grow, consider supporting it:
 <br/>
 
 [![Star this repo](https://img.shields.io/badge/⭐_Star_this_repo-Help_others_discover-yellow?style=for-the-badge)](https://github.com/yourusername/ai-spec-driven-book)
-[![Share](https://img.shields.io/badge/📢_Share-Spread_the_word-blue?style=for-the-badge)](https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20AI%20learning%20platform!&url=https://ai-spec-driven-book-six.vercel.app/)
+[![Share](https://img.shields.io/badge/📢_Share-Spread_the_word-blue?style=for-the-badge)](https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20AI%20learning%20platform!&url=https://ai-powered-book.vercel.app/)
 [![Contribute](https://img.shields.io/badge/🤝_Contribute-Join_us-green?style=for-the-badge)](https://github.com/yourusername/ai-spec-driven-book/blob/main/CONTRIBUTING.md)
 
 <br/>

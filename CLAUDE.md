@@ -1,4 +1,4 @@
-﻿# Claude Code Rules
+# Claude Code Rules
 
 This file is generated during init for the selected agent.
 
@@ -216,7 +216,7 @@ This is a fullstack educational platform teaching Physical AI and Humanoid Robot
 - `fullstack/frontend-book/` — Docusaurus 3.9.2 learning platform with embedded RAG chatbot
 - `fullstack/backend/` — FastAPI RAG chatbot service (Groq LLM + Qdrant vector DB)
 - `specs/` — Comprehensive feature specifications for all modules and components
-- Live deployment: https://ai-spec-driven-book-six.vercel.app/
+- Live deployment: https://ai-powered-book.vercel.app/
 
 **Learning Modules (6 total):**
 1. Robotic Nervous System (ROS 2, middleware, AI agents)
